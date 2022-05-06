@@ -1,7 +1,7 @@
 
 # Analyzing 53 million Reddit comments using Hadoop map-reduce
 
-This project was required for me as a part of the "Big Data Analytics" course that I studied at University of Science and Technology, Zewail City (Mini Project 1 - Hadoop Ecosystem).
+This project was required for [us](#authors) as a part of the "Big Data Analytics" course that we studied at University of Science and Technology, Zewail City (Mini Project 1 - Hadoop Ecosystem).
 ## Dataset
 The Dataset consists of a list of comments taken for the Reddit public API from various subreddits. 
 - The dataset is one file with each comment in JSON format in one line
