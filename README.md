@@ -34,7 +34,8 @@ The details are mentioned in the Report.pdf document.
 
     5. The posts reach on top subreddits by day and hour.
     
-   ![A heatmap showing the posts engagement on "r/AskReddit" subreddit](post_reach.PNG)
+A heatmap showing the posts engagement on "r/AskReddit" subreddit:
+![A heatmap showing the posts engagement on "r/AskReddit" subreddit](post_reach.PNG)
 
 
 ## How to run a job?
