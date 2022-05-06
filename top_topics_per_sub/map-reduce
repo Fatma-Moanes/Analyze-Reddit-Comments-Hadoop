@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# ------------------------------------------------------------- #
+# A shell script for the CIE427 students to run MapReduce jobs  #
+# Written by: Muhammad Hamdy AlAref                             #
+# Last update: October 7, 2019                                  #
+# ------------------------------------------------------------- #
+# Usage Instructions                                            #
+# 1. Set JAVA_HOME and HADOOP_HOME below to point to their      #
+#    correct paths on your machine.                             #
+# 2. Add the following line (including the dot at the beginning #
+#    to the end of your ~/.bashrc file,                         #
+#    . /absolute/path/to/this/script                            #
+# 3. Now you can run a map-reduce job by calling the map-reduce #
+#    function from any terminal emulator, as well as calling    #
+#    any hadoop executable, e.g., hdfs!                         #
+# ------------------------------------------------------------- #
+# NOTE                                                          #
+# The map-reduce job should be located in the <job> directory   #
+# as one Java file named MapReduce.java, two Python files named #
+# mapper.py and reducer.py or two C++ files nmaed mapper.cpp    #
+# and reducer.cpp depending on the first argument; "java",      #
+# "python" or "c++", respectively.                              #
+# ------------------------------------------------------------- #
+# ALL THE PATHS USED IN THE SCRIPT MUST NOT INCLUDE ANY SPACES! #
+#                                                               #
+# This includes JAVA_HOME, HADOOP_HOME, the current working     #
+# directory and the <job> directory!                            #
+# ------------------------------------------------------------- #
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HADOOP_HOME=~/hadoop
+export PATH=${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${PATH}
+export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar:${HADOOP_HOME}/share/hadoop/tools/lib/*
+
+function map-reduce() {
+  if [ $# != 2 ]; then
+    echo "Usage: map-reduce <job> <N>"
+    return
+  fi
+
+  JOB=$1
+  N=$2
+
+  rm -rf $JOB/output
+  rm -rf $JOB/final_output
+
+  hadoop org.apache.hadoop.streaming.HadoopStreaming \
+    -files $JOB/mapper.py,$JOB/reducer.py \
+    -input $JOB../input \
+    -output $JOB/output \
+    -mapper "mapper.py ../top_subs/top_subs.txt" \
+    -reducer "reducer.py $N"
+
+  hadoop org.apache.hadoop.streaming.HadoopStreaming \
+    -files $JOB/mapper.py,$JOB/reducer.py \
+    -input $JOB/output/part* \
+    -output $JOB/final_output \
+    -mapper "mapper2.py" \
+    -reducer "reducer2.py $N"
+}
