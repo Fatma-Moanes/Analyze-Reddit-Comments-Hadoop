@@ -13,11 +13,11 @@ The Dataset consists of a list of comments taken for the Reddit public API from 
 
     Windows (Powershell): 
 
-        `gc <file_name> | select -first <line_number> >> sample.out` 
+       $ gc <file_name> | select -first <line_number> >> sample.out
 
     Linux: 
     
-        `head -n <line_number> <file_name> >> sample.out`
+       $ head -n <line_number> <file_name> >> sample.out
 
 
 ## Data Inspection and Data Analysis
@@ -34,7 +34,7 @@ The details are mentioned in the Report.pdf document.
 
     5. The posts reach on top subreddits by day and hour.
     
-   ![A heatmap showing the posts engagement on "r/AskReddit" subreddit](post_reach.png)
+   ![A heatmap showing the posts engagement on "r/AskReddit" subreddit](post_reach.PNG)
 
 
 ## How to run a job?
